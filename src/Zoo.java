@@ -71,7 +71,7 @@ public class Zoo {
     public void listAllEnclosures() {
         System.out.println("\n----- Список вольєрів у зоопарку: -----");
         for (Enclosure enclosure : enclosures) {
-
+            enclosure.listAnimals(); // Викликаємо метод у класі Enclosure
         }
     }
 }

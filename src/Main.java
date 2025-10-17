@@ -4,36 +4,60 @@ public class Main {
         // Отримується єдиний екземпляр Зоопарку за допомогою Singleton
         Zoo zoo = Zoo.getInstance();
 
-        // Створюємо об'єкти тварин за допомогою Фабрики (AnimalFactory)
-        System.out.println("----- Створення об'єктів за допомогою так званої Фабрики -----");
+        // Створюються вольєри
+        Enclosure lionEnclosure = new Enclosure("Вольєр для левів", "Савана");
+        Enclosure birdEnclosure = new Enclosure("Пташник", "Тропіки");
+        Enclosure crocodileEnclosure = new Enclosure("Водосховище для крокодилів", "Річковий");
 
-        // Створюємо Лева. Зверни увагу: останній параметр 10 (int) – це prideSize.
+        // Створюються об'єкти тварин за допомогою Фабрики
         Animal simba = AnimalFactory.createAnimal("lion", "Сімба", 7, Gender.MALE, 16);
-
-        // Створюємо Колібрі. Останній параметр 60 (int) – це flightSpeed.
         Animal humming = AnimalFactory.createAnimal("hummingbird", "Вжик", 1, Gender.FEMALE, 57);
-
-        // Створюємо Крокодила. Останній параметр 4.5 (double) – це lengthInMeters.
         Animal croc = AnimalFactory.createAnimal("crocodile", "Зубастик", 18, Gender.MALE, 4.8);
 
-        System.out.println("-------------------------------------------------");
+        // Додаються тварин у відповідні вольєри (Агрегація)
+        lionEnclosure.addAnimal(simba);
+        birdEnclosure.addAnimal(humming);
+        crocodileEnclosure.addAnimal(croc);
 
-        // Додаються тварин до зоопарку
-        zoo.addAnimal(simba);
-        zoo.addAnimal(humming);
-        zoo.addAnimal(croc);
-
-        System.out.println();
-
-        // Демонстрація поліморфізму
-        zoo.makeAllAnimalsMakeSound();
+        // 5. Додаються вольєри до зоопарку
+        zoo.addEnclosure(lionEnclosure);
+        zoo.addEnclosure(birdEnclosure);
+        zoo.addEnclosure(crocodileEnclosure);
 
         System.out.println();
 
-        // Демонстрація специфічних методів, створених завдяки Наслідуванню
-        ((Lion)simba).hunt(); // Приведення типу (cast), бо метод hunt() специфічний для Lion
-        ((Hummingbird)humming).fly(); // Аналогічно
-        ((Crocodile)croc).baskInSun(); // Аналогічно
+        // 6. Демонстрація GRASP "Інформаційний експерт" та Агрегації
+        zoo.listAllEnclosures();
+
+        // 7. Створюються та наймаюються працівники
+        Zookeeper john = new Zookeeper("Віктор", 12200.0);
+        Veterinarian mary = new Veterinarian("Артем", 18000.0);
+        zoo.hireEmployee(john);
+        zoo.hireEmployee(mary);
+
+        // 8. Створюються та додаються відвідувачі
+        Visitor visitor1 = new Visitor("Вікторія", 20, Gender.FEMALE);
+        Visitor visitor2 = new Visitor("Петро", 21, Gender.MALE);
+        zoo.addVisitor(visitor1);
+        zoo.addVisitor(visitor2);
+
+        System.out.println();
+
+        // 9. Демонстрація поліморфізму працівників
+        zoo.runDailyRoutine();
+
+        System.out.println();
+
+        // 10. Приклади взаємодії
+        john.feedAnimal(simba);
+        mary.healAnimal(simba);
+
+        System.out.println();
+
+        visitor1.buyTicket();
+        visitor1.watchAnimal(croc);
+
+
 
     }
 }
