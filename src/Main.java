@@ -1,8 +1,8 @@
 public class Main {
     public static void main(String[] args) {
 
-        // Створюємо об'єкти Zoo (тимчасово, поки не реалізовано Singleton)
-        Zoo zoo = new Zoo();
+        // Отримується єдиний екземпляр Зоопарку за допомогою Singleton
+        Zoo zoo = Zoo.getInstance();
 
         // Створюємо об'єкти тварин за допомогою Фабрики (AnimalFactory)
         System.out.println("----- Створення об'єктів за допомогою так званої Фабрики -----");
