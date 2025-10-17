@@ -3,22 +3,23 @@ import java.util.List;
 
 public class Zoo {
 
-    // Приватне статичне поле, що містить єдиний екземпляр (тобто Singleton)
+    // Реалізація шаблону Одинак (Singleton)
     private static Zoo instance;
 
-    // Оголошення всіх колекцій
-    private List<Animal> animals;
-    private List<Employee> employees;
-    private List<Visitor> visitors;
+    // Колекції тепер замінені на менеджери (SRP та Low Coupling)
+    private ZooAnimalManager animalManager;
+    private ZooEmployeeManager employeeManager;
+    private ZooVisitorManager visitorManager;
+
+    // Вольєри залишаються тут, оскільки Zoo керує фізичною структурою
     private List<Enclosure> enclosures;
 
-
-    // Приватний коструктор, де ви проходить ініціалізація усіх колекцій (через сінгелтон)
+    // Ініціалізація менеджерів (теж сінгелтон тут працює)
     private Zoo() {
-        this.animals = new ArrayList<>();
-        this.employees = new ArrayList<>(); // Додано
-        this.visitors = new ArrayList<>(); // Додано
-        this.enclosures = new ArrayList<>(); // Додано
+        this.animalManager = new ZooAnimalManager();
+        this.employeeManager = new ZooEmployeeManager();
+        this.visitorManager = new ZooVisitorManager();
+        this.enclosures = new ArrayList<>();
     }
 
     // Публічний статичний метод для отримання єдиного екземпляра
@@ -29,49 +30,32 @@ public class Zoo {
         return instance;
     }
 
-    // Методи для керування тваринами
-    public void addAnimal(Animal animal) {
-        this.animals.add(animal);
-        System.out.println(animal.getName() + " був(ла) доданий(а) до зоопарку.");
+    // 4. Публічні ГЕТТЕРИ для доступу до менеджерів
+    // Тепер увесь функціонал викликається через ці геттери
+    public ZooAnimalManager getAnimalManager() {
+        return animalManager;
     }
 
-    public void makeAllAnimalsMakeSound() {
-        System.out.println("----- Зоопарк прокидається! Тварини починають гомоніти: -----");
-        for (Animal animal : animals) {
-            animal.makeSound();
-        }
+    public ZooEmployeeManager getEmployeeManager() {
+        return employeeManager;
     }
 
-    // Методи для керування працівниками
-    public void hireEmployee(Employee employee) {
-        this.employees.add(employee);
-        System.out.println(employee.getName() + " був(ла) найнятий(а) в зоопарк.");
+    public ZooVisitorManager getVisitorManager() {
+        return visitorManager;
     }
 
-    public void runDailyRoutine() {
-        System.out.println("\n----- Починається щоденна робота зоопарку! -----");
-        for (Employee employee : employees) {
-            employee.performJob();
-        }
-    }
-
-    // Методи для керування відвідувачами
-    public void addVisitor(Visitor visitor) {
-        this.visitors.add(visitor);
-        System.out.println(visitor.getName() + " прибув(ла) до зоопарку.");
-    }
-
-    // Методи для керування вольєрами
+    // 5. Методи для керування вольєрами (залишаються, оскільки це структурний елемент Zoo)
     public void addEnclosure(Enclosure enclosure) {
         this.enclosures.add(enclosure);
-        // Тут може знадобитися getEnclosure, якщо ти не реалізував Enclosure.java
         System.out.println("Вольєр '" + enclosure.getName() + "' був доданий до зоопарку.");
     }
 
     public void listAllEnclosures() {
         System.out.println("\n----- Список вольєрів у зоопарку: -----");
         for (Enclosure enclosure : enclosures) {
-            enclosure.listAnimals(); // Викликаємо метод у класі Enclosure
+            enclosure.listAnimals();
         }
     }
+
+
 }
