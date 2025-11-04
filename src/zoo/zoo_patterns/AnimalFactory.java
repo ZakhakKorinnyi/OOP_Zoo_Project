@@ -16,13 +16,20 @@ public class AnimalFactory {
             case "crocodile":
                 double length = (double) specificParams[0];
                 return new Crocodile(name, age, gender, length);
+
+            // НОВІ ХРЕБЕТНІ
             case "frog":
                 return new Frog(name, age, gender);
             case "pike":
                 return new Pike(name, age, gender);
 
+            // НОВІ БЕЗХРЕБЕТНІ
+            case "spider":
+                return new Spider(name, age, gender);
+            case "butterfly": // ДОДАНО Butterfly
+                return new Butterfly(name, age, gender);
+
             default:
-                // Це Unchecked Exception, який вказує на неправильний вхідний параметр (помилка конфігурації)
                 throw new InvalidDataException("Невідомий тип тварини у Фабриці: " + animalType);
         }
     }

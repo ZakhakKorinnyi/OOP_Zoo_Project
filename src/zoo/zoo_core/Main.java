@@ -16,41 +16,49 @@ public class Main {
         // Отримується єдиний екземпляр Зоопарку за допомогою Singleton
         Zoo zoo = Zoo.getInstance();
 
-        // 1. Створення вольєрів (ДОДАНО ВОЛЬЄРИ ДЛЯ НОВИХ ТИПІВ)
+        // 1. Створення вольєрів (ДОДАНО ВОЛЬЄРИ ДЛЯ БЕЗХРЕБЕТНИХ)
         Enclosure lionEnclosure = new Enclosure("Вольєр для левів", "Савана");
         Enclosure birdEnclosure = new Enclosure("Пташник", "Тропіки");
         Enclosure crocodileEnclosure = new Enclosure("Водосховище для крокодилів", "Водний");
-
-        // НОВІ ВОЛЬЄРИ (для Amphibian та Fish)
         Enclosure frogPond = new Enclosure("Ставок для жаб", "Водно-болотний");
         Enclosure pikeTank = new Enclosure("Акваріум для щук", "Водний");
+
+        // НОВІ ВОЛЬЄРИ ДЛЯ БЕЗХРЕБЕТНИХ
+        Enclosure insectarium = new Enclosure("Інсектаріум", "Сухий");
+        Enclosure butterflyGarden = new Enclosure("Сад метеликів", "Тропіки");
 
         // 2. Створення об'єктів тварин за допомогою Фабрики (ТВОЇ ДАНІ ТА НОВІ ТИПИ)
         Animal simba = AnimalFactory.createAnimal("lion", "Сімба", 7, Gender.MALE, 16);
         Animal humming = AnimalFactory.createAnimal("hummingbird", "Вжик", 1, Gender.FEMALE, 57);
         Animal croc = AnimalFactory.createAnimal("crocodile", "Зубастик", 18, Gender.MALE, 4.8);
-
-        // НОВІ ТВАРИНИ
         Animal kermit = AnimalFactory.createAnimal("frog", "Квак", 1, Gender.MALE);
         Animal jaws = AnimalFactory.createAnimal("pike", "Доррі", 3, Gender.FEMALE);
+
+        // НОВІ БЕЗХРЕБЕТНІ
+        Animal spidey = AnimalFactory.createAnimal("spider", "Восьминіг", 1, Gender.FEMALE);
+        Animal monarch = AnimalFactory.createAnimal("butterfly", "Веселка", 0, Gender.FEMALE); // Вік 0 для комах
 
         // 3. Додаються тварини у вольєри (Агрегація)
         lionEnclosure.addAnimal(simba);
         birdEnclosure.addAnimal(humming);
         crocodileEnclosure.addAnimal(croc);
-
-        // ДОДАВАННЯ НОВИХ ТИПІВ
         frogPond.addAnimal(kermit);
         pikeTank.addAnimal(jaws);
+
+        // ДОДАВАННЯ БЕЗХРЕБЕТНИХ
+        insectarium.addAnimal(spidey);
+        butterflyGarden.addAnimal(monarch);
 
         // 4. Додаються вольєри до зоопарку
         zoo.addEnclosure(lionEnclosure);
         zoo.addEnclosure(birdEnclosure);
         zoo.addEnclosure(crocodileEnclosure);
-
-        // ДОДАВАННЯ НОВИХ ВОЛЬЄРІВ
         zoo.addEnclosure(frogPond);
         zoo.addEnclosure(pikeTank);
+
+        // ДОДАВАННЯ НОВИХ ВОЛЬЄРІВ
+        zoo.addEnclosure(insectarium);
+        zoo.addEnclosure(butterflyGarden);
 
         System.out.println();
 

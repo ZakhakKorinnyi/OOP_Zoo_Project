@@ -37,26 +37,42 @@ public class Enclosure {
             throw new EnclosureViolationException("Вольєр '" + name + "' (біом: " + biome + ") переповнений. Максимум: " + MAX_CAPACITY + " тварини.");
         }
 
-        // 3. ПЕРЕВІРКА ВІДПОВІДНОСТІ БІОМУ (DIP та OCP)
+        // 3. ПЕРЕВІРКА ВІДПОВІДНОСТІ БІОМУ/ТИПУ (DIP та OCP)
 
-        // Перевіряємо, до якого АБСТРАКТНОГО КЛАСУ належить тварина
+        // ---- ЗАГАЛЬНІ ПРАВИЛА БІОЛОГІЧНИХ ТИПІВ ----
 
-        // Рептилії (Crocodile) - вимагають водного біому
+        // ПРАВИЛО 1: Безхребетні не можуть бути у вольєрі, призначеному для Хребетних (Савана, Водний, Водно-болотний, якщо це не спеціалізований інсектаріум)
+        if (animal instanceof Invertebrate && (this.biome.contains("Савана") || this.biome.contains("Вод"))) {
+            // Дозволяємо лише якщо вольєр явно називається "Сад метеликів" або "Інсектаріум"
+            if (!this.name.contains("Інсектаріум") && !this.name.contains("Сад метеликів")) {
+                throw new EnclosureViolationException("Безхребетні (Invertebrate) не можуть бути поселені у біом, призначений для хребетних: " + this.biome);
+            }
+        }
+
+        // НОВЕ ПРАВИЛО 2 (КРИТИЧНЕ): Хребетні не можуть бути у вольєрах, призначених для Безхребетних
+        if (animal instanceof Vertebrate && (this.name.contains("Інсектаріум") || this.name.contains("Сад метеликів"))) {
+            throw new EnclosureViolationException("Хребетні (Vertebrate) не можуть бути поселені у вольєр, призначений для безхребетних: " + this.name);
+        }
+
+
+        // ---- СПЕЦИФІЧНІ ПРАВИЛА БІОМІВ (як було) ----
+
+        // Рептилії - вимагають водного біому
         if (animal instanceof Reptile && !this.biome.contains("Вод")) {
             throw new EnclosureViolationException("Плазуни (Reptile) не можуть бути поселені у біом: " + this.biome);
         }
 
-        // Риби (Pike) - вимагають водного біому
+        // Риби - вимагають водного біому
         if (animal instanceof Fish && !this.biome.contains("Вод")) {
             throw new EnclosureViolationException("Риби (Fish) не можуть бути поселені у біом: " + this.biome);
         }
 
-        // Птахи (Hummingbird) - не можуть жити в сухій Савані
+        // Птахи - не можуть жити в сухій Савані
         if (animal instanceof Bird && this.biome.contains("Савана")) {
             throw new EnclosureViolationException("Птахи (Bird) не можуть жити у біомі: " + this.biome);
         }
 
-        // Ссавці (Mammal) - не можуть жити у Водному вольєрі
+        // Ссавці - не можуть жити у Водному вольєрі
         if (animal instanceof Mammal && this.biome.contains("Вод")) {
             throw new EnclosureViolationException("Ссавці (Mammal) не можуть бути поселені у Водний біом.");
         }
@@ -66,7 +82,6 @@ public class Enclosure {
     }
 
     // Метод для виведення списку тварин у вольєрі
-    // Демонстрація принципу "Інформаційний експерт"
     public void listAnimals() {
         System.out.println("Тварини у вольєрі " + name + " (" + biome + "):");
         if (animals.isEmpty()) {
