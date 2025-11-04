@@ -1,5 +1,7 @@
 package zoo.zoo_animals;
 
+import zoo_exceptions.InvalidDataException; // імпорт
+
 // Абстрактний клас zoo.zoo_animals.Animal, який буде базовим для всіх конкретних тварин
 public abstract class Animal {
 
@@ -11,6 +13,14 @@ public abstract class Animal {
 
     // Конструктор
     public Animal(String name, int age, Gender gender) {
+        // Перевірка на некоректні дані
+        if (name == null || name.trim().isEmpty()) {
+            throw new InvalidDataException("Ім'я тварини не може бути порожнім.");
+        }
+        if (age < 0) {
+            throw new InvalidDataException("Вік тварини не може бути від'ємним.");
+        }
+
         this.name = name;
         this.age = age;
         this.gender = gender;
