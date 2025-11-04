@@ -1,4 +1,6 @@
-package zoo.zoo_animals;
+package zoo.base_objects;
+
+import zoo.enums.EmployeeStatus;
 
 import java.util.UUID;
 

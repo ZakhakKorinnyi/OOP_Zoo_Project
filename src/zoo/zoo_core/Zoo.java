@@ -1,6 +1,6 @@
 package zoo.zoo_core;
 
-import zoo.zoo_animals.Enclosure;
+import zoo.base_objects.Enclosure;
 import zoo.zoo_managers.ZooAnimalManager;
 import zoo.zoo_managers.ZooEmployeeManager;
 import zoo.zoo_managers.ZooVisitorManager;

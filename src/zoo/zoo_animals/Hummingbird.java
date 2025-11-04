@@ -1,5 +1,8 @@
 package zoo.zoo_animals;
 
+import zoo.abstract_hierarchy.Bird;
+import zoo.enums.Gender;
+
 // ЗМІНА: extends Bird
 public class Hummingbird extends Bird {
 

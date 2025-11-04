@@ -1,5 +1,8 @@
 package zoo.zoo_animals;
 
+import zoo.abstract_hierarchy.Arthropod;
+import zoo.enums.Gender;
+
 public class Spider extends Arthropod {
 
     // Павук має 8 ніг.

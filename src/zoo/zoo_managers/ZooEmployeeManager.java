@@ -1,6 +1,6 @@
 package zoo.zoo_managers;
 
-import zoo.zoo_animals.Employee; // Виправлений імпорт для Employee (вважаємо, що він у zoo_entities)
+import zoo.base_objects.Employee; // Виправлений імпорт для Employee (вважаємо, що він у zoo_entities)
 import zoo_exceptions.DuplicateEntityException;
 import zoo_exceptions.EntityNotFoundException;
 

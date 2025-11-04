@@ -1,4 +1,6 @@
-package zoo.zoo_animals;
+package zoo.abstract_hierarchy;
+
+import zoo.enums.Gender;
 
 // Клас Плазунів, успадковується від Vertebrate
 public abstract class Reptile extends Vertebrate {

@@ -1,10 +1,10 @@
 package zoo.employees;
 
-import zoo.zoo_animals.Animal;
-import zoo.zoo_animals.Employee;
+import zoo.abstract_hierarchy.Animal;
+import zoo.base_objects.Employee;
 import zoo_exceptions.AnimalCareException; // Імпорт для Checked Exception
 
-// Клас zoo.employees.Zookeeper успадковує від zoo.zoo_animals.Employee
+// Клас zoo.employees.Zookeeper успадковує від zoo.base_objects.Employee
 public class Zookeeper extends Employee {
 
     public Zookeeper(String name, double salary) {

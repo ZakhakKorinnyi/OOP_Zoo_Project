@@ -1,5 +1,6 @@
-package zoo.zoo_animals;
+package zoo.base_objects;
 
+import zoo.abstract_hierarchy.*;
 import zoo_exceptions.EnclosureViolationException;
 import zoo_exceptions.DuplicateEntityException;
 

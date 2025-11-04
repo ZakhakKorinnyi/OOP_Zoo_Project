@@ -1,4 +1,6 @@
-package zoo.zoo_animals;
+package zoo.abstract_hierarchy;
+
+import zoo.enums.Gender;
 
 // Клас Членистоногих (павуки, раки, скорпіони)
 public abstract class Arthropod extends Invertebrate {

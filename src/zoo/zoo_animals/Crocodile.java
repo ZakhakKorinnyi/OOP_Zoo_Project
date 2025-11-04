@@ -1,5 +1,8 @@
 package zoo.zoo_animals;
 
+import zoo.abstract_hierarchy.Reptile;
+import zoo.enums.Gender;
+
 // ЗМІНА: extends Reptile
 public class Crocodile extends Reptile {
 

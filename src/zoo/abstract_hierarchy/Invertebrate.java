@@ -1,4 +1,6 @@
-package zoo.zoo_animals;
+package zoo.abstract_hierarchy;
+
+import zoo.enums.Gender;
 
 // Базовий клас для безхребетних тварин
 public abstract class Invertebrate extends Animal {

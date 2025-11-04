@@ -1,5 +1,8 @@
 package zoo.zoo_animals;
 
+import zoo.abstract_hierarchy.Mammal;
+import zoo.enums.Gender;
+
 // ЗМІНА: extends Mammal
 public class Lion extends Mammal {
 

@@ -1,5 +1,8 @@
 package zoo.zoo_animals;
 
+import zoo.abstract_hierarchy.Fish;
+import zoo.enums.Gender;
+
 public class Pike extends Fish {
 
     // Pike (Щука) завжди прісноводна.

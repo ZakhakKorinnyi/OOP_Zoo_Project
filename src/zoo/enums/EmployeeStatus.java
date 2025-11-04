@@ -1,4 +1,4 @@
-package zoo.zoo_animals;
+package zoo.enums;
 
 public enum EmployeeStatus {
     ACTIVE,

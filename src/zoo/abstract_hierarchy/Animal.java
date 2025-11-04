@@ -1,8 +1,9 @@
-package zoo.zoo_animals;
+package zoo.abstract_hierarchy;
 
+import zoo.enums.Gender;
 import zoo_exceptions.InvalidDataException; // імпорт
 
-// Абстрактний клас zoo.zoo_animals.Animal, який буде базовим для всіх конкретних тварин
+// Абстрактний клас zoo.abstract_hierarchy.Animal, який буде базовим для всіх конкретних тварин
 public abstract class Animal {
 
     // Приватні поля для інкапсуляції
