@@ -7,7 +7,6 @@ import zoo.zoo_animals.Enclosure;
 import zoo.zoo_animals.Gender;
 import zoo.zoo_animals.Visitor;
 import zoo.zoo_patterns.AnimalFactory;
-// Додані імпорти для Checked Exceptions, які тепер потрібно обробляти:
 import zoo_exceptions.PermissionDeniedException;
 import zoo_exceptions.AnimalCareException;
 
@@ -17,25 +16,41 @@ public class Main {
         // Отримується єдиний екземпляр Зоопарку за допомогою Singleton
         Zoo zoo = Zoo.getInstance();
 
-        // Створюються вольєри
+        // 1. Створення вольєрів (ДОДАНО ВОЛЬЄРИ ДЛЯ НОВИХ ТИПІВ)
         Enclosure lionEnclosure = new Enclosure("Вольєр для левів", "Савана");
         Enclosure birdEnclosure = new Enclosure("Пташник", "Тропіки");
-        Enclosure crocodileEnclosure = new Enclosure("Водосховище для крокодилів", "Водний"); // Змінено біом на "Водний" для Croc
+        Enclosure crocodileEnclosure = new Enclosure("Водосховище для крокодилів", "Водний");
 
-        // Створюються об'єкти тварин за допомогою Фабрики (ТВОЇ ДАНІ)
+        // НОВІ ВОЛЬЄРИ (для Amphibian та Fish)
+        Enclosure frogPond = new Enclosure("Ставок для жаб", "Водно-болотний");
+        Enclosure pikeTank = new Enclosure("Акваріум для щук", "Водний");
+
+        // 2. Створення об'єктів тварин за допомогою Фабрики (ТВОЇ ДАНІ ТА НОВІ ТИПИ)
         Animal simba = AnimalFactory.createAnimal("lion", "Сімба", 7, Gender.MALE, 16);
         Animal humming = AnimalFactory.createAnimal("hummingbird", "Вжик", 1, Gender.FEMALE, 57);
         Animal croc = AnimalFactory.createAnimal("crocodile", "Зубастик", 18, Gender.MALE, 4.8);
 
-        // Додаються тварин у вольєри (Агрегація)
+        // НОВІ ТВАРИНИ
+        Animal kermit = AnimalFactory.createAnimal("frog", "Квак", 1, Gender.MALE);
+        Animal jaws = AnimalFactory.createAnimal("pike", "Доррі", 3, Gender.FEMALE);
+
+        // 3. Додаються тварини у вольєри (Агрегація)
         lionEnclosure.addAnimal(simba);
         birdEnclosure.addAnimal(humming);
         crocodileEnclosure.addAnimal(croc);
 
-        // Додаються вольєри до зоопарку
+        // ДОДАВАННЯ НОВИХ ТИПІВ
+        frogPond.addAnimal(kermit);
+        pikeTank.addAnimal(jaws);
+
+        // 4. Додаються вольєри до зоопарку
         zoo.addEnclosure(lionEnclosure);
         zoo.addEnclosure(birdEnclosure);
         zoo.addEnclosure(crocodileEnclosure);
+
+        // ДОДАВАННЯ НОВИХ ВОЛЬЄРІВ
+        zoo.addEnclosure(frogPond);
+        zoo.addEnclosure(pikeTank);
 
         System.out.println();
 
@@ -48,11 +63,11 @@ public class Main {
 
         // Менеджер працівників
         zoo.getEmployeeManager().hireEmployee(john);
-        zoo.getEmployeeManager().hireEmployee(mary); // Виклик через менеджер
+        zoo.getEmployeeManager().hireEmployee(mary);
 
         // 8. Створюються та додаються відвідувачів (ТВОЇ ДАНІ)
-        Visitor visitor1 = new Visitor("Вікторія", 20, Gender.FEMALE); // Купить квиток
-        Visitor visitor2 = new Visitor("Петро", 21, Gender.MALE); // Не купить квиток
+        Visitor visitor1 = new Visitor("Вікторія", 20, Gender.FEMALE);
+        Visitor visitor2 = new Visitor("Петро", 21, Gender.MALE);
 
         // Менеджер відвідувачів
         zoo.getVisitorManager().addVisitor(visitor1);
@@ -67,40 +82,34 @@ public class Main {
         System.out.println("\n----- Приклади взаємодії та обробка винятків -----");
 
         // --- СЦЕНАРІЙ 1: Доглядач (AnimalCareException) ---
-        simba.getSick(); // Імітуємо хворобу Сімби
+        simba.getSick();
         System.out.println(simba.getName() + " почувається зле.");
 
         try {
-            // Невдалий виклик: Віктор не може годувати хвору Сімбу (викидає виняток)
             john.feedAnimal(simba);
         } catch (AnimalCareException e) {
             System.err.println("[ОБРОБЛЕНО] Помилка догляду: " + e.getMessage());
         }
 
         try {
-            // Успішний виклик: Артем лікує хвору Сімбу
             mary.healAnimal(simba);
-            // Якщо викликати mary.healAnimal(simba) ще раз, він викине виняток
         } catch (AnimalCareException e) {
             System.err.println("[ОБРОБЛЕНО] Помилка догляду: " + e.getMessage());
         }
 
         // --- СЦЕНАРІЙ 2: Відвідувачі (PermissionDeniedException) ---
         System.out.println();
-        visitor1.buyTicket(); // Купує квиток
+        visitor1.buyTicket();
 
         try {
-            // Успішний виклик: Вікторія має квиток
             visitor1.watchAnimal(croc);
         } catch (PermissionDeniedException e) {
             System.err.println("[ОБРОБЛЕНО] Помилка доступу: " + e.getMessage());
         }
 
         try {
-            // Невдалий виклик: Петро не має квитка (викидає виняток)
             visitor2.watchAnimal(simba);
         } catch (PermissionDeniedException e) {
-            // Обов'язкова обробка винятку
             System.err.println("[ОБРОБЛЕНО] Помилка доступу: " + e.getMessage());
         }
 

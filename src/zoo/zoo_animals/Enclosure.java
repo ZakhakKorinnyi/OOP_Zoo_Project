@@ -1,7 +1,7 @@
 package zoo.zoo_animals;
 
-import zoo_exceptions.EnclosureViolationException; // Імпорт для порушень правил
-import zoo_exceptions.DuplicateEntityException; // Імпорт для дублікатів
+import zoo_exceptions.EnclosureViolationException;
+import zoo_exceptions.DuplicateEntityException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,6 @@ public class Enclosure {
     private String biome; // Наприклад, "Савана", "Джунглі"
     private List<Animal> animals;
 
-    // Встановлюємо максимальну місткість для прикладу
     private final int MAX_CAPACITY = 3;
 
     public Enclosure(String name, String biome) {
@@ -23,6 +22,7 @@ public class Enclosure {
 
     /**
      * Метод для додавання тварини у вольєр з перевірками.
+     * Використовує 'instanceof' для перевірки біологічного класу (DIP).
      * @param animal Об'єкт тварини, який потрібно додати.
      */
     public void addAnimal(Animal animal) {
@@ -37,17 +37,28 @@ public class Enclosure {
             throw new EnclosureViolationException("Вольєр '" + name + "' (біом: " + biome + ") переповнений. Максимум: " + MAX_CAPACITY + " тварини.");
         }
 
-        // 3. Перевірка на невідповідність біому (EnclosureViolationException)
-        String species = animal.getClass().getSimpleName();
+        // 3. ПЕРЕВІРКА ВІДПОВІДНОСТІ БІОМУ (DIP та OCP)
 
-        // Приклад правила: Крокодили (Reptile) можуть жити лише у водному біомі
-        if (species.equals("Crocodile") && !this.biome.contains("Вод")) {
-            throw new EnclosureViolationException("Крокодил не може бути поселений у біом: " + this.biome);
+        // Перевіряємо, до якого АБСТРАКТНОГО КЛАСУ належить тварина
+
+        // Рептилії (Crocodile) - вимагають водного біому
+        if (animal instanceof Reptile && !this.biome.contains("Вод")) {
+            throw new EnclosureViolationException("Плазуни (Reptile) не можуть бути поселені у біом: " + this.biome);
         }
 
-        // Приклад правила: Колібрі (Bird) не можуть жити в Савані
-        if (species.equals("Hummingbird") && this.biome.contains("Савана")) {
-            throw new EnclosureViolationException("Колібрі не може жити у біомі: " + this.biome);
+        // Риби (Pike) - вимагають водного біому
+        if (animal instanceof Fish && !this.biome.contains("Вод")) {
+            throw new EnclosureViolationException("Риби (Fish) не можуть бути поселені у біом: " + this.biome);
+        }
+
+        // Птахи (Hummingbird) - не можуть жити в сухій Савані
+        if (animal instanceof Bird && this.biome.contains("Савана")) {
+            throw new EnclosureViolationException("Птахи (Bird) не можуть жити у біомі: " + this.biome);
+        }
+
+        // Ссавці (Mammal) - не можуть жити у Водному вольєрі
+        if (animal instanceof Mammal && this.biome.contains("Вод")) {
+            throw new EnclosureViolationException("Ссавці (Mammal) не можуть бути поселені у Водний біом.");
         }
 
         this.animals.add(animal);
@@ -62,7 +73,8 @@ public class Enclosure {
             System.out.println("   (Пусто)");
         } else {
             for (Animal animal : animals) {
-                System.out.println("   - " + animal.getName() + " (" + animal.getClass().getSimpleName() + ")");
+                // Виводимо також Phylum
+                System.out.println("   - " + animal.getName() + " (" + animal.getClass().getSimpleName() + " - " + animal.getPhylum() + ")");
             }
         }
     }
