@@ -2,7 +2,7 @@ package zoo.zoo_core;
 
 import zoo.employees.Veterinarian;
 import zoo.employees.Zookeeper;
-import zoo.abstract_hierarchy.Animal;
+import zoo.base_objects.Animal;
 import zoo.base_objects.Enclosure;
 import zoo.enums.Gender;
 import zoo.base_objects.Visitor;

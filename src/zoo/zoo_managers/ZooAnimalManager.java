@@ -1,6 +1,6 @@
 package zoo.zoo_managers;
 
-import zoo.abstract_hierarchy.Animal; // Виправлений імпорт для Animal
+import zoo.base_objects.Animal; // Виправлений імпорт для Animal
 import zoo_exceptions.DuplicateEntityException; // Імпорт DuplicateEntityException
 import zoo_exceptions.EntityNotFoundException; // Імпорт EntityNotFoundException
 

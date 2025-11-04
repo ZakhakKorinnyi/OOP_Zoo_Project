@@ -1,9 +1,10 @@
-package zoo.abstract_hierarchy;
+package zoo.base_objects;
 
 import zoo.enums.Gender;
-import zoo_exceptions.InvalidDataException; // імпорт
+import zoo_exceptions.InvalidDataException;
+import zoo.patterns_strategy.FeedingStrategy; // ДОДАНО ІМПОРТ ДЛЯ СТРАТЕГІЇ
 
-// Абстрактний клас zoo.abstract_hierarchy.Animal, який буде базовим для всіх конкретних тварин
+// Абстрактний клас zoo.base_objects.Animal, який буде базовим для всіх конкретних тварин
 public abstract class Animal {
 
     // Приватні поля для інкапсуляції
@@ -14,6 +15,9 @@ public abstract class Animal {
 
     // ДОДАНО: Поле для біологічного типу (Хребетні/Безхребетні)
     protected String phylum;
+
+    // ДОДАНО: Контекст для шаблону Стратегія
+    private FeedingStrategy feedingStrategy;
 
     // Конструктор
     public Animal(String name, int age, Gender gender) {
@@ -68,9 +72,30 @@ public abstract class Animal {
         System.out.println(name + " вилікувався.");
     }
 
+    // ЗМІНА: Старий метод eat() тепер публічний інтерфейс, що делегує виконання Стратегії
     public void eat() {
-        System.out.println(name + " їсть.");
+        performFeed();
     }
+
+    // ДОДАНО: Метод, який викликається конкретною Стратегією для виконання базової дії
+    public void performEat() {
+        System.out.println(getName() + " приймає їжу (базовий метод).");
+    }
+
+    // ДОДАНО: Публічний метод для встановлення Стратегії
+    public void setFeedingStrategy(FeedingStrategy strategy) {
+        this.feedingStrategy = strategy;
+    }
+
+    // ДОДАНО: Публічний метод, який делегує виконання Стратегії
+    public void performFeed() {
+        if (feedingStrategy == null) {
+            System.out.println(getName() + " не має визначеної стратегії годування!");
+            return;
+        }
+        this.feedingStrategy.feed(this);
+    }
+
 
     // Метод виведення інформації про об'єкт
     @Override

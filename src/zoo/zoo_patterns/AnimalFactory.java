@@ -1,6 +1,6 @@
 package zoo.zoo_patterns;
 
-import zoo.abstract_hierarchy.Animal;
+import zoo.base_objects.Animal;
 import zoo.enums.Gender;
 import zoo.zoo_animals.*;
 import zoo_exceptions.InvalidDataException;

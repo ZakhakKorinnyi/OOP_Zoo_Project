@@ -1,7 +1,6 @@
 package zoo.base_objects;
 
 import zoo.enums.Gender;
-import zoo.abstract_hierarchy.Animal;
 import zoo_exceptions.InvalidDataException;
 import zoo_exceptions.PermissionDeniedException; // Імпорт для Checked Exception
 

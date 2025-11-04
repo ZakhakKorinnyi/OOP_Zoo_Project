@@ -1,5 +1,6 @@
 package zoo.abstract_hierarchy;
 
+import zoo.base_objects.Animal;
 import zoo.enums.Gender;
 
 // Базовий клас для безхребетних тварин

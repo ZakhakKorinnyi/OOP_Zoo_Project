@@ -1,6 +1,6 @@
 package zoo.employees;
 
-import zoo.abstract_hierarchy.Animal;
+import zoo.base_objects.Animal;
 import zoo.base_objects.Employee;
 import zoo_exceptions.AnimalCareException; // Імпорт для Checked Exception
 
