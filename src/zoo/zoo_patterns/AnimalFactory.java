@@ -1,6 +1,7 @@
 package zoo.zoo_patterns;
 
 import zoo.zoo_animals.*;
+import zoo_exceptions.InvalidDataException;
 
 public class AnimalFactory {
 
@@ -15,8 +16,14 @@ public class AnimalFactory {
             case "crocodile":
                 double length = (double) specificParams[0];
                 return new Crocodile(name, age, gender, length);
+            case "frog":
+                return new Frog(name, age, gender);
+            case "pike":
+                return new Pike(name, age, gender);
+
             default:
-                throw new IllegalArgumentException("Невідомий тип тварини: " + animalType);
+                // Це Unchecked Exception, який вказує на неправильний вхідний параметр (помилка конфігурації)
+                throw new InvalidDataException("Невідомий тип тварини у Фабриці: " + animalType);
         }
     }
 }

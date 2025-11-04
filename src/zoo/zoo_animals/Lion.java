@@ -1,14 +1,17 @@
 package zoo.zoo_animals;
 
-// Клас zoo.zoo_animals.Lion, який успадковує від абстрактного класу zoo.zoo_animals.Animal
-public class Lion extends Animal {
+// ЗМІНА: extends Mammal
+public class Lion extends Mammal {
 
     // Поле, специфічне для лева: розмір прайду
     private int prideSize;
 
-    // Конструктор, який викликає конструктор батьківського класу zoo.zoo_animals.Animal
+    // Конструктор, який тепер викликає конструктор Mammal
     public Lion(String name, int age, Gender gender, int prideSize) {
-        super(name, age, gender);
+        // ВИКЛИК Mammal:
+        // 15.0 - приклад періоду вагітності (gestationPeriodWeeks),
+        // необхідний для конструктора Mammal
+        super(name, age, gender, 15.0);
         this.prideSize = prideSize;
     }
 

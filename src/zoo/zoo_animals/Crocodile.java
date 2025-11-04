@@ -1,13 +1,14 @@
 package zoo.zoo_animals;
 
-// Клас zoo.zoo_animals.Crocodile, який успадковує від абстрактного класу zoo.zoo_animals.Animal
-public class Crocodile extends Animal {
+// ЗМІНА: extends Reptile
+public class Crocodile extends Reptile {
 
     // Специфічне для крокодила поле: довжина в метрах
     private double lengthInMeters;
 
-    // Конструктор, який викликає конструктор батьківського класу
+    // Конструктор, який тепер викликає конструктор Reptile
     public Crocodile(String name, int age, Gender gender, double lengthInMeters) {
+        // ВИКЛИК Reptile:
         super(name, age, gender);
         this.lengthInMeters = lengthInMeters;
     }
@@ -26,19 +27,15 @@ public class Crocodile extends Animal {
 
     // Додатковий метод, специфічний для крокодилів
     public void baskInSun() {
-        System.out.println(getName() + " гріється на сонці.");
+        // Викликаємо метод, успадкований від Reptile
+        regulateTemperature();
     }
 
+    // Перевизначення методу toString()
     @Override
     public String toString() {
         return "Crocodile{" +
                 "lengthInMeters=" + lengthInMeters +
-                '}';
-    }
-
-    public Object toString(String prefix) {
-        return "Crocodile{" +
-                "lengthInMeters=" + lengthInMeters +
-                '}';
+                "}";
     }
 }

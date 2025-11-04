@@ -1,14 +1,16 @@
 package zoo.zoo_animals;
 
-// Клас zoo.zoo_animals.Hummingbird, який успадковує від абстрактного класу zoo.zoo_animals.Animal
-public class Hummingbird extends Animal {
+// ЗМІНА: extends Bird
+public class Hummingbird extends Bird {
 
     // Специфічне для колібрі поле: швидкість польоту
     private int flightSpeed;
 
-    // Конструктор, який викликає конструктор батьківського класу
+    // Конструктор, який тепер викликає конструктор Bird
     public Hummingbird(String name, int age, Gender gender, int flightSpeed) {
-        super(name, age, gender);
+        // ВИКЛИК Bird:
+        // 12.0 - приклад розмаху крил (wingSpanCm), необхідний для конструктора Bird
+        super(name, age, gender, 12.0);
         this.flightSpeed = flightSpeed;
     }
 
@@ -24,7 +26,8 @@ public class Hummingbird extends Animal {
         System.out.println(getName() + " грається, літаючи над квітами.");
     }
 
-    // Додатковий метод,що специфічний для колібрі
+    // Додатковий метод, що специфічний для колібрі, який реалізує абстрактний fly() з Bird
+    @Override // Додано @Override, оскільки fly() тепер абстрактний у Bird
     public void fly() {
         System.out.println(getName() + " летить зі швидкістю " + flightSpeed + " км/год.");
     }
