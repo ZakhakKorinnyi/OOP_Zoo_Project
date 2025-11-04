@@ -1,6 +1,6 @@
-import java.util.Objects;
+package zoo.zoo_animals;
 
-// Абстрактний клас Animal, який буде базовим для всіх конкретних тварин
+// Абстрактний клас zoo.zoo_animals.Animal, який буде базовим для всіх конкретних тварин
 public abstract class Animal {
 
     // Приватні поля для інкапсуляції

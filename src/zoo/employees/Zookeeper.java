@@ -1,4 +1,9 @@
-// Клас Zookeeper успадковує від Employee
+package zoo.employees;
+
+import zoo.zoo_animals.Animal;
+import zoo.zoo_animals.Employee;
+
+// Клас zoo.employees.Zookeeper успадковує від zoo.zoo_animals.Employee
 public class Zookeeper extends Employee {
 
     public Zookeeper(String name, double salary) {

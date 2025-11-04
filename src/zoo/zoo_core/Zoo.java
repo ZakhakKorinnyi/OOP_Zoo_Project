@@ -1,3 +1,10 @@
+package zoo.zoo_core;
+
+import zoo.zoo_animals.Enclosure;
+import zoo.zoo_managers.ZooAnimalManager;
+import zoo.zoo_managers.ZooEmployeeManager;
+import zoo.zoo_managers.ZooVisitorManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +18,7 @@ public class Zoo {
     private ZooEmployeeManager employeeManager;
     private ZooVisitorManager visitorManager;
 
-    // Вольєри залишаються тут, оскільки Zoo керує фізичною структурою
+    // Вольєри залишаються тут, оскільки zoo.zoo_core.Zoo керує фізичною структурою
     private List<Enclosure> enclosures;
 
     // Ініціалізація менеджерів (теж сінгелтон тут працює)
@@ -44,7 +51,7 @@ public class Zoo {
         return visitorManager;
     }
 
-    // 5. Методи для керування вольєрами (залишаються, оскільки це структурний елемент Zoo)
+    // 5. Методи для керування вольєрами (залишаються, оскільки це структурний елемент zoo.zoo_core.Zoo)
     public void addEnclosure(Enclosure enclosure) {
         this.enclosures.add(enclosure);
         System.out.println("Вольєр '" + enclosure.getName() + "' був доданий до зоопарку.");

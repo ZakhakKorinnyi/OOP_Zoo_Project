@@ -1,3 +1,13 @@
+package zoo.zoo_core;
+
+import zoo.employees.Veterinarian;
+import zoo.employees.Zookeeper;
+import zoo.zoo_animals.Animal;
+import zoo.zoo_animals.Enclosure;
+import zoo.zoo_animals.Gender;
+import zoo.zoo_animals.Visitor;
+import zoo.zoo_patterns.AnimalFactory;
+
 public class Main {
     public static void main(String[] args) {
 

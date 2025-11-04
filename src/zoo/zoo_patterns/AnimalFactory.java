@@ -1,3 +1,7 @@
+package zoo.zoo_patterns;
+
+import zoo.zoo_animals.*;
+
 public class AnimalFactory {
 
     public static Animal createAnimal(String animalType, String name, int age, Gender gender, Object... specificParams) {

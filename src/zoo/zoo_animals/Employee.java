@@ -1,3 +1,5 @@
+package zoo.zoo_animals;
+
 import java.util.UUID;
 
 // Абстрактний клас, що є базовим для всіх працівників

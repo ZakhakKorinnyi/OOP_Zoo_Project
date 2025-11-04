@@ -1,4 +1,6 @@
-// Клас Crocodile, який успадковує від абстрактного класу Animal
+package zoo.zoo_animals;
+
+// Клас zoo.zoo_animals.Crocodile, який успадковує від абстрактного класу zoo.zoo_animals.Animal
 public class Crocodile extends Animal {
 
     // Специфічне для крокодила поле: довжина в метрах
@@ -25,5 +27,18 @@ public class Crocodile extends Animal {
     // Додатковий метод, специфічний для крокодилів
     public void baskInSun() {
         System.out.println(getName() + " гріється на сонці.");
+    }
+
+    @Override
+    public String toString() {
+        return "Crocodile{" +
+                "lengthInMeters=" + lengthInMeters +
+                '}';
+    }
+
+    public Object toString(String prefix) {
+        return "Crocodile{" +
+                "lengthInMeters=" + lengthInMeters +
+                '}';
     }
 }

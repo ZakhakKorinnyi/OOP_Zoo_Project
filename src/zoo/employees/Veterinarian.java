@@ -1,4 +1,9 @@
-// Клас Veterinarian успадковує від Employee
+package zoo.employees;
+
+import zoo.zoo_animals.Animal;
+import zoo.zoo_animals.Employee;
+
+// Клас zoo.employees.Veterinarian успадковує від zoo.zoo_animals.Employee
 public class Veterinarian extends Employee {
 
     public Veterinarian(String name, double salary) {

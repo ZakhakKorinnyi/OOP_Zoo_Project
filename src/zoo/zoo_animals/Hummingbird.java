@@ -1,4 +1,6 @@
-// Клас Hummingbird, який успадковує від абстрактного класу Animal
+package zoo.zoo_animals;
+
+// Клас zoo.zoo_animals.Hummingbird, який успадковує від абстрактного класу zoo.zoo_animals.Animal
 public class Hummingbird extends Animal {
 
     // Специфічне для колібрі поле: швидкість польоту

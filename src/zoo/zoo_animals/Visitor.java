@@ -1,3 +1,5 @@
+package zoo.zoo_animals;
+
 public class Visitor {
 
     private String name;

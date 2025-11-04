@@ -1,3 +1,7 @@
+package zoo.zoo_managers;
+
+import zoo.zoo_animals.Employee;
+
 import java.util.ArrayList;
 import java.util.List;
 
