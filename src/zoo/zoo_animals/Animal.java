@@ -11,6 +11,9 @@ public abstract class Animal {
     private Gender gender;
     private boolean isHealthy;
 
+    // ДОДАНО: Поле для біологічного типу (Хребетні/Безхребетні)
+    protected String phylum;
+
     // Конструктор
     public Animal(String name, int age, Gender gender) {
         // Перевірка на некоректні дані
@@ -48,6 +51,11 @@ public abstract class Animal {
         return isHealthy;
     }
 
+    // ДОДАНО: Геттер для нового поля phylum
+    public String getPhylum() {
+        return phylum;
+    }
+
     // Методи для зміни стану тварини
     public void getSick() {
         this.isHealthy = false;
@@ -66,6 +74,6 @@ public abstract class Animal {
     // Метод виведення інформації про об'єкт
     @Override
     public String toString() {
-        return "Тварина: " + name + ", Вік: " + age + ", Стать: " + gender + ", Здорова: " + isHealthy;
+        return "Тварина: " + name + " (Тип: " + phylum + "), Вік: " + age + ", Стать: " + gender + ", Здорова: " + isHealthy;
     }
 }
