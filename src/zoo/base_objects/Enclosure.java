@@ -28,21 +28,19 @@ public class Enclosure {
      */
     public void addAnimal(Animal animal) {
 
-        // 1. Перевірка на дублікати (DuplicateEntityException)
+        // Перевірка на дублікати (DuplicateEntityException)
         if (animals.stream().anyMatch(a -> a.getName().equals(animal.getName()))) {
             throw new DuplicateEntityException("Тварина з ім'ям " + animal.getName() + " вже знаходиться у вольєрі " + name + ".");
         }
 
-        // 2. Перевірка на переповнення (EnclosureViolationException)
+        // Перевірка на переповнення (EnclosureViolationException)
         if (animals.size() >= MAX_CAPACITY) {
             throw new EnclosureViolationException("Вольєр '" + name + "' (біом: " + biome + ") переповнений. Максимум: " + MAX_CAPACITY + " тварини.");
         }
 
-        // 3. ПЕРЕВІРКА ВІДПОВІДНОСТІ БІОМУ/ТИПУ (DIP та OCP)
+        // ПЕРЕВІРКА ВІДПОВІДНОСТІ БІОМУ/ТИПУ
 
-        // ---- ЗАГАЛЬНІ ПРАВИЛА БІОЛОГІЧНИХ ТИПІВ ----
-
-        // ПРАВИЛО 1: Безхребетні не можуть бути у вольєрі, призначеному для Хребетних (Савана, Водний, Водно-болотний, якщо це не спеціалізований інсектаріум)
+        // Безхребетні не можуть бути у вольєрі, призначеному для Хребетних
         if (animal instanceof Invertebrate && (this.biome.contains("Савана") || this.biome.contains("Вод"))) {
             // Дозволяємо лише якщо вольєр явно називається "Сад метеликів" або "Інсектаріум"
             if (!this.name.contains("Інсектаріум") && !this.name.contains("Сад метеликів")) {
@@ -55,8 +53,6 @@ public class Enclosure {
             throw new EnclosureViolationException("Хребетні (Vertebrate) не можуть бути поселені у вольєр, призначений для безхребетних: " + this.name);
         }
 
-
-        // ---- СПЕЦИФІЧНІ ПРАВИЛА БІОМІВ (як було) ----
 
         // Рептилії - вимагають водного біому
         if (animal instanceof Reptile && !this.biome.contains("Вод")) {
